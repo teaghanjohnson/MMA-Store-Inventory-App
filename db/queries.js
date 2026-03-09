@@ -9,7 +9,7 @@ async function insertCategory(category) {
   await pool.query("INSERT INTO categories (category) VALUES ($1)", [category]);
 }
 
-async function searchCategories(search) {
+async function searchCategory(search) {
   const { rows } = await pool.query(
     `
       SELECT *
@@ -37,6 +37,15 @@ async function deleteAllCategories() {
   return rows;
 }
 
+async function getAllItems() {
+  const { rows } = await pool.query("SELECT * FROM items");
+  return rows;
+}
+
+async function insertItem(item) {
+  await pool.query("INSERT INTO items (item) VALUES ($1)", [category]);
+}
+
 async function searchItem(search) {
   const { rows } = await pool.query(
     `
@@ -48,3 +57,32 @@ async function searchItem(search) {
   );
   return rows;
 }
+
+async function deleteItem(item) {
+  const { rows } = await pool.query(
+    `
+    DELETE FROM items
+    WHERE item LIKE $1
+    `,
+    [item],
+  );
+  return rows;
+}
+
+async function deleteAllItems() {
+  const { rows } = await pool.query(`DELETE FROM items`);
+  return rows;
+}
+
+module.exports = {
+  getAllCategories,
+  insertCategory,
+  searchCategory,
+  deleteCategory,
+  deleteAllCategories,
+  getAllItems,
+  searchItem,
+  insertItem,
+  deleteItem,
+  deleteAllItems,
+};
