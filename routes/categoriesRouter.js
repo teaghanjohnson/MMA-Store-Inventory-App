@@ -4,6 +4,9 @@ const categoryRouter = Router();
 
 categoryRouter.get("/", categoryController.getCategories);
 categoryRouter.get("/new", categoryController.createCategoryGet);
-categoryRouter.get("/new", categoryController.createCategoryPost);
+categoryRouter.post("/new", categoryController.createCategoryPost);
 categoryRouter.get("/search", categoryController.searchCategoryGet);
-categoryRouter.get("/search", categoryController.searchItem);
+categoryRouter.get("/delete", categoryController.deleteCategoryGet);
+categoryRouter.get("/delete", categoryController.deleteAllCategoriesGet);
+
+module.exports = categoryRouter;

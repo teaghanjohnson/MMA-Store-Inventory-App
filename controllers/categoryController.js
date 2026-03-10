@@ -21,13 +21,27 @@ async function searchCategoryGet(req, res) {
 }
 
 async function deleteCategoryGet(req, res) {
-  await db.deleteCategory();
-  res.render("/");
+  const { id } = req.params;
+  await db.deleteCategory(id);
+  res.redirect("/category");
 }
 
 async function deleteAllCategoriesGet(req, res) {
   await db.deleteAllCategories();
-  res.render("/");
+  res.redirect("/index");
+}
+
+async function updateCategoryGet(req, res) {
+  const { id } = req.params;
+  const category = await db.getCategoryById(id);
+  res.render("updateCategory", { category: category[0] });
+}
+
+async function updateCategoryPost(req, res) {
+  const { id } = req.params;
+  const { name, description } = req.body;
+  await db.updateCategoryById(id, name, description);
+  res.redirect("/category");
 }
 
 module.exports = {
@@ -37,4 +51,6 @@ module.exports = {
   searchCategoryGet,
   deleteCategoryGet,
   deleteAllCategoriesGet,
+  updateCategoryGet,
+  updateCategoryPost,
 };
