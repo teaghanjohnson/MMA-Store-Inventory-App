@@ -6,7 +6,7 @@ async function getAllCategories() {
 }
 
 async function insertCategory(category) {
-  await pool.query("INSERT INTO categories (category) VALUES ($1)", [category]);
+  await pool.query("INSERT INTO categories (name) VALUES ($1)", [category]);
 }
 
 async function searchCategory(search) {
@@ -14,26 +14,53 @@ async function searchCategory(search) {
     `
       SELECT *
       FROM categories
-      WHERE category LIKE $1
+      WHERE name LIKE $1
     `,
     [`%${search}%`],
   );
   return rows;
 }
 
-async function deleteCategory(category) {
+async function getCategoryById(id) {
+  const { rows } = await pool.query("SELECT * FROM categories WHERE id = $1", [
+    id,
+  ]);
+  return rows;
+}
+async function updateCategoryById(id, name, description) {
+  await pool.query(
+    "UPDATE categories SET name = $1, descripton = $2 WHERE id = $3",
+    [name, description, id],
+  );
+}
+async function getItemsById(id) {
+  const { rows } = await pool.query("SELECT * FROM items WHERE id = $1", [id]);
+  return rows;
+}
+async function getItemsByCategory(categoryId) {
+  const { rows } = await pool.query(
+    "SELECT * FROM items WHERE categoryId = $1",
+    [categoryId],
+  );
+  return rows;
+}
+async function updateItems(id, name, description) {
+  await pool.query("UPDATE items SET name = $1, descripton = $2 WHERE id = $3");
+}
+
+async function deleteCategory(id) {
   const { rows } = await pool.query(
     `
-    DELETE FROM category
-    WHERE category LIKE $1
+    DELETE FROM categories
+    WHERE id = $1
     `,
-    [category],
+    [id],
   );
   return rows;
 }
 
 async function deleteAllCategories() {
-  const { rows } = await pool.query(`DELETE FROM category`);
+  const { rows } = await pool.query(`DELETE FROM categories`);
   return rows;
 }
 
@@ -42,8 +69,11 @@ async function getAllItems() {
   return rows;
 }
 
-async function insertItem(item) {
-  await pool.query("INSERT INTO items (item) VALUES ($1)", [category]);
+async function insertItem(name, description, price, stock, category_id) {
+  await pool.query(
+    "INSERT INTO items (name, description, price, stock, category_id) VALUES ($1, $2, $3, $4, $5)",
+    [name, description, price, stock, category_id],
+  );
 }
 
 async function searchItem(search) {
@@ -51,20 +81,20 @@ async function searchItem(search) {
     `
     SELECT *
     FROM items
-    WHERE items LIKE $1
+    WHERE name LIKE $1
     `,
     [`%${search}%`],
   );
   return rows;
 }
 
-async function deleteItem(item) {
+async function deleteItem(id) {
   const { rows } = await pool.query(
     `
     DELETE FROM items
-    WHERE item LIKE $1
+    WHERE id = $1
     `,
-    [item],
+    [id],
   );
   return rows;
 }
@@ -85,4 +115,9 @@ module.exports = {
   insertItem,
   deleteItem,
   deleteAllItems,
+  getCategoryById,
+  updateCategoryById,
+  getItemsById,
+  getItemsByCategory,
+  updateItems,
 };
