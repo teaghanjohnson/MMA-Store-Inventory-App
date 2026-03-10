@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Search Categories</h1>
+    <form method="GET" action="/search">
+      <input type="text" name="search" />
+      <button type="submit">Search</button>
+    </form>
+
+    <ul>
+      <% categories.forEach(category => { %>
+        <li><%= category.name %></li>
+     <% }) %>
+    </ul>
+    <a href="/">Home</a>
+  </body>
+</html>
