@@ -6,7 +6,9 @@ categoryRouter.get("/", categoryController.getCategories);
 categoryRouter.get("/new", categoryController.createCategoryGet);
 categoryRouter.post("/new", categoryController.createCategoryPost);
 categoryRouter.get("/search", categoryController.searchCategoryGet);
-categoryRouter.get("/delete", categoryController.deleteCategoryGet);
-categoryRouter.get("/delete", categoryController.deleteAllCategoriesGet);
+categoryRouter.get("/deleteAll", categoryController.deleteAllCategoriesGet);
+categoryRouter.get("/:id/delete", categoryController.deleteCategoryGet);
+categoryRouter.get("/:id/update", categoryController.updateCategoryGet);
+categoryRouter.post("/:id/update", categoryController.updateCategoryPost);
 
 module.exports = categoryRouter;
