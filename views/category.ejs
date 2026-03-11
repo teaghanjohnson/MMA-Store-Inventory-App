@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Teaghans MMA Inventory</title>
+</head>
+<body>
+  <ul>
+    <%categories.forEach(cat => { %>
+      <li><a href="/items?category=
+        <%= cat.id%>"><%=cat.name %></a></li>
+   <% }) %>
+  </ul>
+  
+</body>
+</html>

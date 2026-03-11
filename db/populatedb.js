@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 const { Client } = require("pg");
-
+require("dotenv").config();
 const SQL = `
   CREATE TABLE IF NOT EXISTS categories (
     id SERIAL PRIMARY KEY,
@@ -10,7 +10,7 @@ const SQL = `
   
   );
 
-  INSERT INTO categories
+  INSERT INTO categories (name, description) VALUES ('Gloves', 'MMA and boxing gloves');
 
   CREATE TABLE IF NOT EXISTS items (
     id  SERIAL PRIMARY KEY,
@@ -26,8 +26,11 @@ const SQL = `
 async function main() {
   console.log("seeding...");
   const client = new Client({
-    connectionString:
-      "postgresql://<role_name>:<role_password>@localhost:5432/mma_inventory",
+    host: process.env.PGHOST,
+    user: process.env.PGUSER,
+    database: process.env.PGDATABASE,
+    password: process.env.PGPASSWORD,
+    port: process.env.PGPORT,
   });
   await client.connect();
   await client.query(SQL);

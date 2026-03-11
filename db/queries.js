@@ -37,15 +37,18 @@ async function getItemsById(id) {
   const { rows } = await pool.query("SELECT * FROM items WHERE id = $1", [id]);
   return rows;
 }
-async function getItemsByCategory(categoryId) {
+async function getItemsByCategory(category_id) {
   const { rows } = await pool.query(
-    "SELECT * FROM items WHERE categoryId = $1",
-    [categoryId],
+    "SELECT * FROM items WHERE category_id = $1",
+    [category_id],
   );
   return rows;
 }
 async function updateItems(id, name, description) {
-  await pool.query("UPDATE items SET name = $1, descripton = $2 WHERE id = $3");
+  await pool.query(
+    "UPDATE items SET name = $1, descripton = $2 WHERE id = $3",
+    [name, description, id],
+  );
 }
 
 async function deleteCategory(id) {

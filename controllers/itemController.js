@@ -1,12 +1,16 @@
 const db = require("../db/queries");
 
 async function getItems(req, res) {
-  const items = await db.getAllItems();
-  res.render("index", { items });
+  const { category } = req.query;
+  const items = category
+    ? await db.getItemsByCategory(category)
+    : await db.getAllItems();
+  res.render("items", { items });
 }
 
 async function createItemGet(req, res) {
-  res.render("createItem");
+  const categories = await db.getAllCategories();
+  res.render("createItem", { categories });
 }
 
 async function createItemPost(req, res) {
