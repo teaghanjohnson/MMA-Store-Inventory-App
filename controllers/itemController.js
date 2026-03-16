@@ -1,6 +1,6 @@
 const db = require("../db/queries");
 
-async function getItems(req, res) {
+async function getItemsByCategory(req, res) {
   const { category } = req.query;
   const items = category
     ? await db.getItemsByCategory(category)
@@ -8,6 +8,10 @@ async function getItems(req, res) {
   res.render("items", { items });
 }
 
+async function getAllItems(req, res) {
+  await getAllItems();
+  res.render("items", { items });
+}
 async function createItemGet(req, res) {
   const categories = await db.getAllCategories();
   res.render("createItem", { categories });
@@ -49,7 +53,8 @@ async function updateItemsPost(req, res) {
 }
 
 module.exports = {
-  getItems,
+  getItemsByCategory,
+  getAllItems,
   createItemGet,
   createItemPost,
   searchItemGet,

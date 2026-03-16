@@ -5,6 +5,7 @@
   <title>Teaghans MMA Inventory</title>
 </head>
 <body>
+  <h1>Categories</h1>
   <ul>
     <%categories.forEach(cat => { %>
       <li><a href="/items?category=
@@ -12,5 +13,7 @@
    <% }) %>
   </ul>
   <a href="/">Home</a>
+  <a href="/categories/search">Search</a>
+  <a href="/items/all">View all Items</a>
 </body>
 </html>

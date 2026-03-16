@@ -2,7 +2,8 @@ const { Router } = require("express");
 const itemController = require("../controllers/itemController");
 const itemRouter = Router();
 
-itemRouter.get("/", itemController.getItems);
+itemRouter.get("/", itemController.getItemsByCategory);
+itemRouter.get("/all", itemController.getAllItems);
 itemRouter.get("/new", itemController.createItemGet);
 itemRouter.post("/new", itemController.createItemPost);
 itemRouter.get("/search", itemController.searchItemGet);
