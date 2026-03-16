@@ -9,7 +9,7 @@ async function getItemsByCategory(req, res) {
 }
 
 async function getAllItems(req, res) {
-  await getAllItems();
+  const items = await db.getAllItems();
   res.render("items", { items });
 }
 async function createItemGet(req, res) {
