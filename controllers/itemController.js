@@ -14,8 +14,8 @@ async function createItemGet(req, res) {
 }
 
 async function createItemPost(req, res) {
-  const { item } = req.body;
-  await db.insertItem(item);
+  const { name, description, price, stock, categories } = req.body;
+  await db.insertItem(name, description, price, stock, categories);
   res.redirect("/items");
 }
 
@@ -33,7 +33,7 @@ async function deleteItemGet(req, res) {
 
 async function deleteAllItemsGet(req, res) {
   await db.deleteAllItems();
-  res.render("category");
+  res.redirect("/category");
 }
 
 async function updateItemsGet(req, res) {
@@ -43,9 +43,8 @@ async function updateItemsGet(req, res) {
 }
 
 async function updateItemsPost(req, res) {
-  const { id } = req.params;
-  const { name, description, price, stock } = req.body;
-  await db.updateItems(id, name, description, price, stock);
+  const { name, description, price, stock, category_id } = req.body;
+  await db.updateItems(name, description, price, stock, category_id);
   res.redirect("/items");
 }
 

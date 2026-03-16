@@ -10,9 +10,9 @@ async function createCategoryGet(req, res) {
 }
 
 async function createCategoryPost(req, res) {
-  const { category } = req.body;
-  await db.insertCategory(category);
-  res.redirect("/");
+  const { name } = req.body;
+  await db.insertCategory(name);
+  res.redirect("/categories");
 }
 async function searchCategoryGet(req, res) {
   const { search } = req.query;
@@ -23,12 +23,12 @@ async function searchCategoryGet(req, res) {
 async function deleteCategoryGet(req, res) {
   const { id } = req.params;
   await db.deleteCategory(id);
-  res.redirect("/category");
+  res.redirect("/categories");
 }
 
 async function deleteAllCategoriesGet(req, res) {
   await db.deleteAllCategories();
-  res.redirect("/index");
+  res.redirect("/");
 }
 
 async function updateCategoryGet(req, res) {
@@ -41,7 +41,7 @@ async function updateCategoryPost(req, res) {
   const { id } = req.params;
   const { name, description } = req.body;
   await db.updateCategoryById(id, name, description);
-  res.redirect("/category");
+  res.redirect("/categories");
 }
 
 module.exports = {
