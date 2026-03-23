@@ -6,14 +6,14 @@
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-  <h1>Categories</h1>
-  <ul>
+  <h1 class="section-title">Categories</h1>
+  <ul class="item-list">
     <%categories.forEach(cat => { %>
-      <li><a href="/items?category=
+      <li><a class="list-item" href="/items?category=
         <%= cat.id%>"><%=cat.name %></a></li>
    <% }) %>
   </ul>
-  <div class="category-buttons">
+  <div class="transition-buttons">
     <a href="/" class="nav-btn">Home</a>
     <a href="/categories/search" class="nav-btn">Search</a>
     <a href="/items/all" class="nav-btn">View all Items</a>

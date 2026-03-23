@@ -7,6 +7,7 @@
 :root {
   --gold: #f0a500;
   --blue: #4da6ff;
+  --button-gray: #d0d0d0;
 }
 
 body {
@@ -29,17 +30,12 @@ body {
   object-fit: contain;
 }
 
-.home-buttons {
+.transition-buttons {
   display: flex;
   flex-direction: row;
   width: 100%;
-  background: #d0d0d0;
-}
-.category-buttons {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  background: lightgray;
+  background: var(--button-gray);
+  margin-top: autof;
 }
 
 .nav-btn {
@@ -55,7 +51,7 @@ body {
   padding: 22px 0;
   cursor: pointer;
   transition: all 0.2s ease;
-  background: #d0d0d0;
+  background: var(--button-gray);
   border: none;
   border-right: 1px solid #bbb;
 }
@@ -72,4 +68,56 @@ body {
 .nav-btn:active {
   background: var(--gold);
   color: #1a1410;
+}
+
+.section-title {
+  color: #333;
+  font-family: "Arial Black", "Arial", sans-serif;
+  letter-spacing: 2px;
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 2rem;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 32px 0 16px;
+}
+
+.item-list {
+  list-style: none;
+  max-width: 600px;
+  margin: 24px auto;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item-list li {
+  border-left: 4px solid var(--gold);
+  background: #f7f7f7;
+  border-radius: 4px;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.item-list li:hover {
+  background: #eef5ff;
+  border-left-color: var(--blue);
+}
+
+.list-item {
+  display: block;
+  padding: 14px 20px;
+  text-decoration: none;
+  color: #333;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.list-item:hover {
+  color: var(--blue);
 }
