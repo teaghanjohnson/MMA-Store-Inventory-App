@@ -35,6 +35,12 @@ body {
   width: 100%;
   background: #d0d0d0;
 }
+.category-buttons {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background: lightgray;
+}
 
 .nav-btn {
   flex: 1;

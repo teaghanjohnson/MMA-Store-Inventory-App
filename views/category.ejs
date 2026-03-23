@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Teaghans MMA Inventory</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
   <h1>Categories</h1>
@@ -12,8 +13,10 @@
         <%= cat.id%>"><%=cat.name %></a></li>
    <% }) %>
   </ul>
-  <a href="/">Home</a>
-  <a href="/categories/search">Search</a>
-  <a href="/items/all">View all Items</a>
+  <div class="category-buttons">
+    <a href="/" class="nav-btn">Home</a>
+    <a href="/categories/search" class="nav-btn">Search</a>
+    <a href="/items/all" class="nav-btn">View all Items</a>
+  </div>
 </body>
 </html>
