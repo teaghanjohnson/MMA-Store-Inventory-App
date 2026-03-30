@@ -30,12 +30,22 @@ body {
   object-fit: contain;
 }
 
+.small-logo {
+  width: 100px;
+  max-width: 10vw;
+}
+
+.page-logo {
+  width: 300px;
+  max-width: 30vw;
+}
+
 .transition-buttons {
   display: flex;
   flex-direction: row;
   width: 100%;
   background: var(--button-gray);
-  margin-top: autof;
+  margin-top: auto;
 }
 
 .nav-btn {
