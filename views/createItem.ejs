@@ -3,9 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <title>Teaghans MMA Inventory</title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <h1>Create Item</h1>
+    <div class="page-header">
+      <main class="page-logo">
+        <a href="/">
+          <img
+          src="/images/lightning-logo.png"
+          alt="Thunder Bear Logo"
+          class="small-logo"
+        />
+        </a>
+      </main>
+      <h1 class="section-title">Create Item</h1>
+    </div>
     <form method="POST" action="/items/new">
       <label for="name">Name</label>
       <input type="text" id="itemName" name="name" />
@@ -24,8 +36,7 @@
       <button type="submit" id="submitBtn">Submit</button>
     </form>
     <div class="transition-buttons">
-      <a href="/items/" class="nav-btn"id="smallViewItems">View Existing Items</a>
+      <a href="/items/" class="nav-btn" id="smallViewItems">View Existing Items</a>
     </div>
-    
   </body>
 </html>

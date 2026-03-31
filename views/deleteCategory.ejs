@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Teaghans MMA Inventory</title>
   <link rel="stylesheet" href="/styles.css" />
 </head>
@@ -16,20 +16,20 @@
       />
       </a>
     </main>
-    <h1 class="section-title">Search Items</h1>
+    <h1 class="section-title">Categories</h1>
   </div>
-  <form method="GET" action="/search">
-    <input type="text" name="search" />
-    <button type="submit">Search</button>
-  </form>
-  <ul>
-    <% items.forEach(item => { %>
-      <li><%= item.name %></li>
+  <ul class="item-list">
+    <% categories.forEach(cat => { %>
+      <li>
+        <a class="list-item" href="/items?category=<%= cat.id %>"><%= cat.name %></a>
+        <a href="/categories/<%= cat.id %>/delete" class="deleteCatBtn">✕</a>
+      </li>
     <% }) %>
   </ul>
   <div class="transition-buttons">
     <a href="/" class="nav-btn">Home</a>
-    <a href="/categories" class="nav-btn">Categories</a>
+    <a href="/categories/search" class="nav-btn">Search</a>
+    <a href="/categories/deleteAll" class="nav-btn">Delete All Categories</a>
   </div>
 </body>
 </html>

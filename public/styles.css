@@ -106,9 +106,15 @@ body {
   border-left: 4px solid var(--gold);
   background: #f7f7f7;
   border-radius: 4px;
+  display: flex;
+  align-items: center;
   transition:
     background 0.15s ease,
     border-color 0.15s ease;
+}
+
+.item-list li .list-item {
+  flex: 1;
 }
 
 .item-list li:hover {
@@ -130,4 +136,17 @@ body {
 
 .list-item:hover {
   color: var(--blue);
+}
+.deleteCatBtn {
+  color: white;
+  background: red;
+  border-radius: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 14px 20px;
+}
+.error-msg {
+  color: #e03e3e;
+  font-size: 0.9rem;
+  margin: 4px 0 8px;
 }

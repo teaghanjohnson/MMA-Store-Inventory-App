@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
     <title>Teaghans MMA Inventory</title>
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <h1>Update Item Info</h1>
+    <div class="page-header">
+      <main class="page-logo">
+        <a href="/">
+          <img
+          src="/images/lightning-logo.png"
+          alt="Thunder Bear Logo"
+          class="small-logo"
+        />
+        </a>
+      </main>
+      <h1 class="section-title">Update Item Info</h1>
+    </div>
     <form method="POST" action="/items/new">
-    <label for="name">Name</label>
+      <label for="name">Name</label>
       <input type="text" id="itemName" name="name" />
       <label for="description">Description</label>
       <input type="text" id="itemDescription" name="description" />

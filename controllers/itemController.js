@@ -12,7 +12,7 @@ async function getAllItems(req, res) {
   const items = await db.getAllItems();
   res.render("items", { items });
 }
-async function createItemGet(req, res) {
+async function createItemGet(req, res, error) {
   const categories = await db.getAllCategories();
   res.render("createItem", { categories });
 }

@@ -1,15 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
   <meta charset="UTF-8" />
   <title>Teaghan's MMA Inventory</title>
-  <body>
-    <h1>Create Category</h1>
-    <form method="POST" action="/categories/new">
-      <label for="name">Name</label>
-      <input type="text" id="catName" name="name" />
-      <label for="description">Description</label>
-      <input type="text" id="catDescription" name="description" />
-      <button type="submit" id="submitBtn">Submit</button>
-    </form>
-  </body>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="page-header">
+    <main class="page-logo">
+      <a href="/">
+        <img
+        src="/images/lightning-logo.png"
+        alt="Thunder Bear Logo"
+        class="small-logo"
+      />
+      </a>
+    </main>
+    <h1 class="section-title">Create Category</h1>
+  </div>
+  <form method="POST" action="/categories/new">
+    <% if (error) { %>
+      <p class="error-msg"><%= error %></p>
+    <% } %>
+    <label for="name" class="createCatName">Name</label>
+    <input
+      type="text"
+      id="catName"
+      name="name"
+      required
+      minlength="2"
+      maxlength="50"
+    />
+    <label for="description" class="createCatDesc">Description</label>
+    <input
+      type="text"
+      id="catDescription"
+      name="description"
+      minlength="8"
+      maxlength="100"
+    />
+    <button type="submit" id="catSubmitBtn">Submit</button>
+  </form>
+</body>
 </html>

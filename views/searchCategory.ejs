@@ -1,20 +1,34 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <h1>Search Categories</h1>
-    <form method="GET" action="/search">
-      <input type="text" name="search" />
-      <button type="submit">Search</button>
-    </form>
-
-    <ul>
-      <% categories.forEach(category => { %>
-        <li><%= category.name %></li>
-     <% }) %>
-    </ul>
-    <div class="transition-buttons">
-      <a href="/" class="nav-btn">Home</a>
-    </div>
-    
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Teaghans MMA Inventory</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="page-header">
+    <main class="page-logo">
+      <a href="/">
+        <img
+        src="/images/lightning-logo.png"
+        alt="Thunder Bear Logo"
+        class="small-logo"
+      />
+      </a>
+    </main>
+    <h1 class="section-title">Search Categories</h1>
+  </div>
+  <form method="GET" action="/search">
+    <input type="text" name="search" />
+    <button type="submit">Search</button>
+  </form>
+  <ul>
+    <% categories.forEach(category => { %>
+      <li><%= category.name %></li>
+    <% }) %>
+  </ul>
+  <div class="transition-buttons">
+    <a href="/" class="nav-btn">Home</a>
+  </div>
+</body>
 </html>
