@@ -18,11 +18,14 @@
     </main>
     <h1 class="section-title">Item Inventory</h1>
   </div>
-  <ul>
-    <% items.forEach(item => { %>
-      <li><%= item.name %></li>
-   <% }) %>
-  </ul>
+  <div class="item-container">
+    <ul>
+      <% items.forEach(item => { %>
+        <li><span> <%= item.name %></span><span> x <%= item.stock %></span></li>
+     <% }) %>
+    </ul>
+  </div>
+  
   <div class="transition-buttons">
     <a href="/" class="nav-btn">Home</a>
     <a href="/categories" class="nav-btn">Categories</a>
