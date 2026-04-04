@@ -5,6 +5,12 @@ async function getCategories(req, res) {
   res.render("category", { categories });
 }
 
+async function getCategoryById(req, res) {
+  const { id } = req.params;
+  const category = await db.getCategoryById(id);
+  res.render("category", { categories: category });
+}
+
 async function createCategoryGet(req, res, error) {
   res.render("createCategory", { error: null });
 }
@@ -19,8 +25,10 @@ async function createCategoryPost(req, res, error) {
 }
 async function searchCategoryGet(req, res) {
   const { search } = req.query;
-  const searched = await db.searchCategory(search);
-  res.render("searchCategory", { categories: searched });
+  const categories = search
+    ? await db.searchCategory(search)
+    : await db.getAllCategories();
+  res.render("searchCategory", { categories });
 }
 async function deleteCategoryPageGet(req, res) {
   const categories = await db.getAllCategories();
@@ -53,6 +61,7 @@ async function updateCategoryPost(req, res) {
 
 module.exports = {
   getCategories,
+  getCategoryById,
   createCategoryGet,
   createCategoryPost,
   searchCategoryGet,

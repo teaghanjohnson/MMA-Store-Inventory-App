@@ -17,8 +17,14 @@ async function createItemGet(req, res, error) {
   res.render("createItem", { categories });
 }
 
-async function createItemPost(req, res) {
+async function createItemPost(req, res, error) {
   const { name, description, price, stock, categories } = req.body;
+  if (!name) {
+    return res.render("createItem", { error: "Name is required" });
+  }
+  if (!stock) {
+    return res.render("createItem", { error: "Stock is required" });
+  }
   await db.insertItem(name, description, price, stock, categories);
   res.redirect("/items");
 }

@@ -1,34 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Teaghans MMA Inventory</title>
-  <link rel="stylesheet" href="/styles.css" />
-</head>
-<body>
-  <div class="page-header">
-    <main class="page-logo">
-      <a href="/">
-        <img
-        src="/images/lightning-logo.png"
-        alt="Thunder Bear Logo"
-        class="small-logo"
+  <head>
+    <meta charset="UTF-8" />
+    <title>Teaghans MMA Inventory</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-header">
+      <main class="page-logo">
+        <a href="/">
+          <img
+            src="/images/lightning-logo.png"
+            alt="Thunder Bear Logo"
+            class="small-logo"
+          />
+        </a>
+      </main>
+      <h1 class="section-title">Search Categories</h1>
+    </div>
+    <div class="searchBox">
+      <input
+        type="text"
+        name="categorySearchList"
+        id="categorySearch"
+        placeholder="Enter a category..."
       />
-      </a>
-    </main>
-    <h1 class="section-title">Search Categories</h1>
-  </div>
-  <form method="GET" action="/search">
-    <input type="text" name="search" />
-    <button type="submit">Search</button>
-  </form>
-  <ul>
-    <% categories.forEach(category => { %>
-      <li><%= category.name %></li>
-    <% }) %>
-  </ul>
-  <div class="transition-buttons">
-    <a href="/" class="nav-btn">Home</a>
-  </div>
-</body>
+      <ul id="suggestions"></ul>
+    </div>
+    <script>
+      const categories = <%- JSON.stringify(categories.map(cat =>({ id: cat.id, name: cat.name}))) %>
+      const input = document.getElementById("categorySearch")
+      const suggestions = document.getElementById("suggestions")
+      input.addEventListener("input", () => {
+        const value = input.value.toLowerCase()
+        suggestions.innerHTML = ""
+        if(value == "") return
+        const filtered = categories.filter(cat => cat.name.toLowerCase().includes(value))
+        filtered.forEach(cat => {
+          const li = document.createElement("li")
+          li.textContent = cat.name
+          li.addEventListener("click", () => {
+            input.value = cat.name
+            suggestions.innerHTML = ""
+            window.location.href = `/items?category=${cat.id}`
+          })
+          suggestions.append(li)
+        })
+      })
+    </script>
+    <div class="transition-buttons">
+      <a href="/" class="nav-btn">Home</a>
+      <a href="/categories" class="nav-btn">All Categories</a>
+    </div>
+  </body>
 </html>
