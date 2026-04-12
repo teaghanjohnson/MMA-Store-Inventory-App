@@ -27,10 +27,10 @@ async function getCategoryById(id) {
   ]);
   return rows;
 }
-async function updateCategoryById(id, name, description) {
+async function updateCategoryById(id, name) {
   await pool.query(
-    "UPDATE categories SET name = $1, descripton = $2 WHERE id = $3",
-    [name, description, id],
+    "UPDATE categories SET name = $1 WHERE id = $2",
+    [name, id],
   );
 }
 async function getItemsById(id) {
@@ -44,10 +44,10 @@ async function getItemsByCategory(category_id) {
   );
   return rows;
 }
-async function updateItems(id, name, description) {
+async function updateItems(id, name) {
   await pool.query(
-    "UPDATE items SET name = $1, descripton = $2 WHERE id = $3",
-    [name, description, id],
+    "UPDATE items SET name = $1 WHERE id = $2",
+    [name, id],
   );
 }
 
@@ -72,10 +72,10 @@ async function getAllItems() {
   return rows;
 }
 
-async function insertItem(name, description, price, stock, category_id) {
+async function insertItem(name, stock, category_id) {
   await pool.query(
-    "INSERT INTO items (name, description, price, stock, category_id) VALUES ($1, $2, $3, $4, $5)",
-    [name, description, price, stock, category_id],
+    "INSERT INTO items (name, stock, category_id) VALUES ($1, $2, $3)",
+    [name, stock, category_id],
   );
 }
 

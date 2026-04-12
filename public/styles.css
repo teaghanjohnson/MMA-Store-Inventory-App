@@ -259,6 +259,7 @@ body {
   transition:
     background 0.15s ease,
     border-color;
+  cursor: pointer;
 }
 
 .item-container li:hover {
@@ -268,6 +269,17 @@ body {
 
 .item-container li:last-child {
   border-bottom: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.description {
+  display: flex;
+  height: 30px;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 0.55rem;
 }
 
 .searchBox {

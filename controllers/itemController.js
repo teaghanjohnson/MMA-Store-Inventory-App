@@ -18,14 +18,14 @@ async function createItemGet(req, res, error) {
 }
 
 async function createItemPost(req, res, error) {
-  const { name, description, price, stock, categories } = req.body;
+  const { name, stock, categories } = req.body;
   if (!name) {
     return res.render("createItem", { error: "Name is required" });
   }
   if (!stock) {
     return res.render("createItem", { error: "Stock is required" });
   }
-  await db.insertItem(name, description, price, stock, categories);
+  await db.insertItem(name, stock, categories);
   res.redirect("/items");
 }
 
@@ -52,9 +52,15 @@ async function updateItemsGet(req, res) {
   res.render("updateItems", { item: item[0] });
 }
 
-async function updateItemsPost(req, res) {
-  const { name, description, price, stock, category_id } = req.body;
-  await db.updateItems(name, description, price, stock, category_id);
+async function updateItemsPost(req, res, error) {
+  const { name, stock, category_id } = req.body;
+  if (!name) {
+    res.render("updateItems", { error: "Name is required" });
+  }
+  if (!stock) {
+    res.render("updateItems", { error: "Stock is required" });
+  }
+  await db.updateItems(name, stock, category_id);
   res.redirect("/items");
 }
 

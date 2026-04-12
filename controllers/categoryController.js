@@ -52,10 +52,14 @@ async function updateCategoryGet(req, res) {
   res.render("updateCategory", { category: category[0] });
 }
 
-async function updateCategoryPost(req, res) {
+async function updateCategoryPost(req, res, error) {
   const { id } = req.params;
-  const { name, description } = req.body;
-  await db.updateCategoryById(id, name, description);
+  const { name } = req.body;
+  if (!name) {
+    return res.render("updateCategory", { error: "Name is required" });
+  }
+
+  await db.updateCategoryById(id, name);
   res.redirect("/categories");
 }
 
