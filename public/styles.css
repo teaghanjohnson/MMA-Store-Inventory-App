@@ -361,3 +361,9 @@ body {
   border-left-color: var(--blue);
   background: var(--blue);
 }
+
+@media (max-width: 600px) {
+  .transition-buttons {
+    flex-direction: column;
+  }
+}
