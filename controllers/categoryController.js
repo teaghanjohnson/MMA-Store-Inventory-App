@@ -20,6 +20,10 @@ async function createCategoryPost(req, res, error) {
   if (!name) {
     return res.render("createCategory", { error: "Name is required." });
   }
+  const existing = await db.getCategoryByName(name);
+  if (existing.length > 0) {
+    return res.render("createCategory", { error: "A category with that name already exists." });
+  }
   await db.insertCategory(name);
   res.redirect("/categories");
 }
@@ -56,9 +60,14 @@ async function updateCategoryPost(req, res, error) {
   const { id } = req.params;
   const { name } = req.body;
   if (!name) {
-    return res.render("updateCategory", { error: "Name is required" });
+    const category = await db.getCategoryById(id);
+    return res.render("updateCategory", { error: "Name is required", category: category[0] });
   }
-
+  const existing = await db.getCategoryByName(name);
+  if (existing.length > 0 && existing[0].id !== parseInt(id)) {
+    const category = await db.getCategoryById(id);
+    return res.render("updateCategory", { error: "A category with that name already exists.", category: category[0] });
+  }
   await db.updateCategoryById(id, name);
   res.redirect("/categories");
 }

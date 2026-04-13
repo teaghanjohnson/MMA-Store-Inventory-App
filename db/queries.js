@@ -28,10 +28,7 @@ async function getCategoryById(id) {
   return rows;
 }
 async function updateCategoryById(id, name) {
-  await pool.query(
-    "UPDATE categories SET name = $1 WHERE id = $2",
-    [name, id],
-  );
+  await pool.query("UPDATE categories SET name = $1 WHERE id = $2", [name, id]);
 }
 async function getItemsById(id) {
   const { rows } = await pool.query("SELECT * FROM items WHERE id = $1", [id]);
@@ -39,15 +36,18 @@ async function getItemsById(id) {
 }
 async function getItemsByCategory(category_id) {
   const { rows } = await pool.query(
-    "SELECT * FROM items WHERE category_id = $1",
+    `SELECT items.*, categories.name AS category_name
+     FROM items
+     JOIN categories ON items.category_id = categories.id
+     WHERE items.category_id = $1`,
     [category_id],
   );
   return rows;
 }
-async function updateItems(id, name) {
+async function updateItems(id, name, stock, category_id) {
   await pool.query(
-    "UPDATE items SET name = $1 WHERE id = $2",
-    [name, id],
+    "UPDATE items SET name = $1, stock = $2, category_id = $3 WHERE id = $4",
+    [name, stock, category_id, id],
   );
 }
 
@@ -68,7 +68,11 @@ async function deleteAllCategories() {
 }
 
 async function getAllItems() {
-  const { rows } = await pool.query("SELECT * FROM items");
+  const { rows } = await pool.query(
+    `SELECT items.*, categories.name AS category_name
+     FROM items
+     JOIN categories ON items.category_id = categories.id`
+  );
   return rows;
 }
 
@@ -107,6 +111,22 @@ async function deleteAllItems() {
   return rows;
 }
 
+async function getItemByName(name) {
+  const { rows } = await pool.query(
+    "SELECT id FROM items WHERE LOWER(name) = LOWER($1)",
+    [name],
+  );
+  return rows;
+}
+
+async function getCategoryByName(name) {
+  const { rows } = await pool.query(
+    "SELECT id FROM categories WHERE LOWER(name) = LOWER($1)",
+    [name],
+  );
+  return rows;
+}
+
 module.exports = {
   getAllCategories,
   insertCategory,
@@ -123,4 +143,6 @@ module.exports = {
   deleteItem,
   deleteAllItems,
   updateItems,
+  getItemByName,
+  getCategoryByName,
 };

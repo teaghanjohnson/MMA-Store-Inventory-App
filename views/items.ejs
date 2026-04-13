@@ -18,19 +18,59 @@
     </main>
     <h1 class="section-title">Item Inventory</h1>
   </div>
-  <div class="item-container">
+  
+  <form id="editAllForm" action="/items/update-all" method=POST>
+  <ul class="item-container">
     <% items.forEach(item => { %>
       <li>
-        <span><%= item.name %></span>
-        <span>x <%= item.stock %></span>
+        <div class="item-display">
+          <span><%= item.name %></span>
+          <span><%= item.category_name %></span>
+          <span>x <%= item.stock %></span>
+        </div>
+
+        <div class="item-edit hidden">
+          <input type="hidden" name="items[<%= item.id %>][id]" value="<%= item.id %>"/>
+          <input type="text" name="items[<%= item.id %>][name]" value="<%= item.name %>"/>
+          <select name="items[<%= item.id %>][category_id]">
+            <% categories.forEach(cat => { %>
+              <option value="<%= cat.id %>" <%= cat.id === item.category_id ? 'selected' : '' %>>
+                <%= cat.name %>
+              </option>
+            <% }) %>
+          </select>
+          <input type="number" name="items[<%= item.id %>][stock]" value="<%= item.stock %>" min="0"/>
+        </div>
       </li>
     <% }) %>
-  </div>
+  </ul>
+  </form>
   
   <div class="transition-buttons">
     <a href="/" class="nav-btn">Home</a>
     <a href="/categories" class="nav-btn">Categories</a>
-    <a href="/items/create" class="nav-btn">Add Item</a>
+    <a href="/items/new" class="nav-btn">Add Item</a>
+    <button id="editAllBtn" type="button" class="nav-btn" onclick="startEdit()">Edit Items</button>
+    <button id="cancelAllBtn" type="button" class="nav-btn hidden" onclick="cancelEditAll()">Cancel</button>
+    <button id="saveAllBtn" type="submit" class="nav-btn hidden" form="editAllForm">Save Changes</button>
   </div>
+
+  <script>
+    function startEdit() {
+      document.querySelectorAll(".item-display").forEach(item => item.classList.add('hidden'));
+      document.querySelectorAll(".item-edit").forEach(item => item.classList.remove('hidden'));
+
+      document.getElementById('editAllBtn').classList.add('hidden');
+      document.getElementById('cancelAllBtn').classList.remove('hidden');
+      document.getElementById('saveAllBtn').classList.remove('hidden');
+    }
+    function cancelEditAll() {
+      document.querySelectorAll('.item-display').forEach(item => item.classList.remove('hidden'));
+      document.querySelectorAll('.item-edit').forEach(item => item.classList.add('hidden'));
+      document.getElementById('editAllBtn').classList.remove('hidden');
+      document.getElementById('cancelAllBtn').classList.add('hidden');
+      document.getElementById('saveAllBtn').classList.add('hidden');
+    }
+  </script>
 </body>
 </html>

@@ -239,13 +239,19 @@ body {
   box-shadow: 0px 3px 8px;
   font-size: 18px;
 }
-.item-container ul {
+
+#editAllForm {
+  width: 100%;
+}
+
+.item-container {
   list-style: none;
   width: 100%;
   padding: 0;
 }
 
-.item-container li {
+.item-container li,
+.item-edit input {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -269,6 +275,36 @@ body {
 
 .item-container li:last-child {
   border-bottom: none;
+}
+
+.item-display,
+.item-edit {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+}
+
+.item-display span:nth-child(2),
+.item-edit select {
+  text-align: center;
+}
+
+.item-display span:nth-child(3),
+.item-edit input[type="number"] {
+  text-align: right;
+}
+
+.item-edit input,
+.item-edit select {
+  padding: 6px 8px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-family: "Arial Black", Arial, sans-serif;
+  text-transform: uppercase;
+  width: 100%;
 }
 
 .hidden {

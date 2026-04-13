@@ -9,6 +9,7 @@ itemRouter.post("/new", itemController.createItemPost);
 itemRouter.get("/search", itemController.searchItemGet);
 itemRouter.get("/deleteAll", itemController.deleteAllItemsGet);
 itemRouter.get("/:id/delete", itemController.deleteItemGet);
+itemRouter.post("/update-all", itemController.updateAllItemsPost);
 itemRouter.get("/:id/update", itemController.updateItemsGet);
 itemRouter.post("/:id/update", itemController.updateItemsPost);
 
