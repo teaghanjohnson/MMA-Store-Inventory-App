@@ -361,7 +361,42 @@ body {
   border-left-color: var(--blue);
   background: var(--blue);
 }
+@keyframes response {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  75% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+}
 
+.response {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  background: var(--gold);
+  color: #1a1410;
+  font-family: "Arial Black", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: response 3s ease forwards;
+  pointer-events: none;
+}
 @media (max-width: 600px) {
   .transition-buttons {
     flex-direction: column;

@@ -55,6 +55,10 @@
     <button id="saveAllBtn" type="submit" class="nav-btn hidden" form="editAllForm">Save Changes</button>
   </div>
 
+  <% if (saved) { %>
+    <div class="response">Items updated</div>
+  <% } %>
+
   <script>
     function startEdit() {
       document.querySelectorAll(".item-display").forEach(item => item.classList.add('hidden'));

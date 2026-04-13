@@ -6,13 +6,13 @@ async function getItemsByCategory(req, res) {
   const items = category
     ? await db.getItemsByCategory(category)
     : await db.getAllItems();
-  res.render("items", { items, categories });
+  res.render("items", { items, categories, saved: req.query.saved === "true" });
 }
 
 async function getAllItems(req, res) {
   const items = await db.getAllItems();
   const categories = await db.getAllCategories();
-  res.render("items", { items, categories });
+  res.render("items", { items, categories, saved: req.query.saved === "true" });
 }
 async function createItemGet(req, res, error) {
   const categories = await db.getAllCategories();
@@ -89,7 +89,7 @@ async function updateAllItemsPost(req, res) {
       }
     }
   }
-  res.redirect("/items");
+  res.redirect("/items?saved=true");
 }
 
 module.exports = {
