@@ -4,10 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <title>Thunder Bear Martial Arts</title>
   </head>
   <body>
     <main class="home-center">
+      <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fa-regular fa-file-lines"></i>
+      </button>
+
+      <div class="sidebar hidden">
+        <h2>Inventory Overview</h2>
+        <p>Total Categories: <%= totalCategories %></p>
+        <p>Total Items: <%= totalItems %></p>
+      </div>
+
       <img
         src="/images/thunder-bear.png"
         alt="Thunder Bear Logo"

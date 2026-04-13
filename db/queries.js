@@ -71,7 +71,7 @@ async function getAllItems() {
   const { rows } = await pool.query(
     `SELECT items.*, categories.name AS category_name
      FROM items
-     JOIN categories ON items.category_id = categories.id`
+     JOIN categories ON items.category_id = categories.id`,
   );
   return rows;
 }
@@ -127,6 +127,15 @@ async function getCategoryByName(name) {
   return rows;
 }
 
+async function getTotalCategories() {
+  const { rows } = await pool.query("SELECT COUNT(*) FROM categories");
+  return rows;
+}
+
+async function getTotalItems() {
+  const { rows } = await pool.query("SELECT COUNT(*) FROM items");
+  return rows;
+}
 module.exports = {
   getAllCategories,
   insertCategory,
@@ -145,4 +154,6 @@ module.exports = {
   updateItems,
   getItemByName,
   getCategoryByName,
+  getTotalCategories,
+  getTotalItems,
 };

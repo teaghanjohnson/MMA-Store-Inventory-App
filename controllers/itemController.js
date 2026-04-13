@@ -19,6 +19,10 @@ async function createItemGet(req, res, error) {
   res.render("createItem", { categories });
 }
 
+async function totalItems() {
+  const total = await db.getTotalItems;
+  return total;
+}
 async function createItemPost(req, res, error) {
   const { name, stock, category_id } = req.body;
   if (!name) {
@@ -103,4 +107,5 @@ module.exports = {
   updateItemsGet,
   updateItemsPost,
   updateAllItemsPost,
+  totalItems,
 };

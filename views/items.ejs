@@ -60,6 +60,10 @@
   <% } %>
 
   <script>
+    if (window.location.search.includes('saved=true')) {
+      history.replaceState(null, '', window.location.pathname);
+    }
+
     function startEdit() {
       document.querySelectorAll(".item-display").forEach(item => item.classList.add('hidden'));
       document.querySelectorAll(".item-edit").forEach(item => item.classList.remove('hidden'));

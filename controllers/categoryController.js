@@ -22,7 +22,9 @@ async function createCategoryPost(req, res, error) {
   }
   const existing = await db.getCategoryByName(name);
   if (existing.length > 0) {
-    return res.render("createCategory", { error: "A category with that name already exists." });
+    return res.render("createCategory", {
+      error: "A category with that name already exists.",
+    });
   }
   await db.insertCategory(name);
   res.redirect("/categories");
@@ -61,15 +63,26 @@ async function updateCategoryPost(req, res, error) {
   const { name } = req.body;
   if (!name) {
     const category = await db.getCategoryById(id);
-    return res.render("updateCategory", { error: "Name is required", category: category[0] });
+    return res.render("updateCategory", {
+      error: "Name is required",
+      category: category[0],
+    });
   }
   const existing = await db.getCategoryByName(name);
   if (existing.length > 0 && existing[0].id !== parseInt(id)) {
     const category = await db.getCategoryById(id);
-    return res.render("updateCategory", { error: "A category with that name already exists.", category: category[0] });
+    return res.render("updateCategory", {
+      error: "A category with that name already exists.",
+      category: category[0],
+    });
   }
   await db.updateCategoryById(id, name);
   res.redirect("/categories");
+}
+
+async function totalCategories() {
+  const total = await db.totalCategories();
+  return total;
 }
 
 module.exports = {
@@ -83,4 +96,5 @@ module.exports = {
   updateCategoryGet,
   updateCategoryPost,
   deleteCategoryPageGet,
+  totalCategories,
 };
