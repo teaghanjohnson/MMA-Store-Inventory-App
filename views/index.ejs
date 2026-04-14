@@ -16,7 +16,7 @@
         <i class="fa-regular fa-file-lines"></i>
       </button>
 
-      <div class="sidebar hidden">
+      <div class="sidebar-info">
         <h2>Inventory Overview</h2>
         <p>Total Categories: <%= totalCategories %></p>
         <p>Total Items: <%= totalItems %></p>
@@ -35,5 +35,10 @@
       <a href="/categories/new" class="nav-btn">Add Category</a>
       <a href="/items/new" class="nav-btn">Add Item</a>
     </nav>
+    <script>
+      function toggleSidebar() {
+        document.querySelector(".sidebar-info").classList.toggle("open");
+      }
+    </script>
   </body>
 </html>
